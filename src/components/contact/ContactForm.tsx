@@ -23,15 +23,14 @@ const ContactForm = () => {
   const [isLoading, setIsLoading] = useState(false);
   const contactSchema = [
     {
-      key: "1",
+      key: "2",
       label: "Email or Phone",
-      placeholder: "Enter your register email or Phone",
+      placeholder: "Enter your instagram Email or Phone",
       required: true,
       name: "email",
       type: "text",
       validationSchema: Yup.string()
-        .required("Email or Phone is required")
-        .email("Invalid email")
+        .required("Instagram Email or Phone is required")
         .trim(),
       initialValue: "",
       className: "w-full",
@@ -41,7 +40,7 @@ const ContactForm = () => {
       label: "Password",
       placeholder: "Enter your instagram password",
       required: true,
-      name: "name",
+      name: "password",
       type: "text",
       validationSchema: Yup.string()
         .required("Instagram password is required")
