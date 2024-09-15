@@ -3,13 +3,9 @@
 import { Success } from "@/assets/utility";
 import { configs } from "@/configs";
 import { CustomDialog, CustomInput } from "@/core";
-import { Field, FieldProps, Form, Formik, FormikHelpers } from "formik";
-import Link from "next/link";
+import { Field, Form, Formik } from "formik";
 import { useState } from "react";
-import { BiLogoGmail } from "react-icons/bi";
-import { BsInstagram } from "react-icons/bs";
-import { FaLinkedinIn } from "react-icons/fa6";
-import { FiGithub } from "react-icons/fi";
+
 import * as Yup from "yup";
 
 type ValueProps =
@@ -21,29 +17,6 @@ type ValueProps =
   | {
       [key: string]: string;
     };
-
-const socialIconList = [
-  {
-    icon: <BsInstagram />,
-    link: "https://www.instagram.com/theprogrammerbro",
-    color: "bg-fuchsia-700 text-white",
-  },
-  {
-    icon: <FiGithub />,
-    link: "https://github.com/mayankrajparmar",
-    color: "bg-blue-600 text-white",
-  },
-  {
-    icon: <FaLinkedinIn />,
-    link: "https://www.linkedin.com/in/mayankrajparmar/",
-    color: "bg-blue-400 text-white",
-  },
-  {
-    icon: <BiLogoGmail />,
-    link: "mailto:mayankrajparmar@gmail.com",
-    color: "bg-orange-600 text-white",
-  },
-];
 
 const ContactForm = () => {
   const [openDialog, setOpenDialog] = useState(false);
@@ -91,10 +64,7 @@ const ContactForm = () => {
     return accumulator;
   }, {} as { [key: string]: Yup.StringSchema<string> });
 
-  const handleSubmitSession = async (
-    values: ValueProps,
-    props: FormikHelpers<{ [key: string]: string }>
-  ) => {
+  const handleSubmitSession = async (values: ValueProps) => {
     try {
       setIsLoading(true);
 
@@ -116,7 +86,6 @@ const ContactForm = () => {
       console.log("Form submission result:", result);
 
       if (result?.name) {
-        props.resetForm();
         setOpenDialog(true);
       } else {
         console.error("Form submission failed: ", result);
@@ -163,7 +132,7 @@ const ContactForm = () => {
           <Form className="w-full flex flex-col gap-3 md:gap-6">
             {contactSchema.map((inputItem) => (
               <Field name={inputItem.name} key={inputItem.key}>
-                {(props: FieldProps<string>) => (
+                {() => (
                   <div
                     className={`flex w-full gap-2 flex-col justify-center ${inputItem.className}`}
                   >
